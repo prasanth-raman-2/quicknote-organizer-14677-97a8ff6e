@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react";
 
-/* === COLOR PALETTE === */
+/* === COLOR PALETTE & SKEUOMORPHIC DESIGN === */
 const COLORS = {
   primary: "#4A90E2",
   secondary: "#FFFFFF",
   accent: "#F5A623",
-  background: "#f5f0e6", // subtle off-white for faux paper background
+  background: "#f5f0e6", // Off-white, faux paper
   text: "#232019",
-  card: "#fffbe7",      // creamy paper color for notes
-  border: "#E7DAB0",    // faded tan to resemble real paper borders
+  card: "#fffbe7",      // Cream notebook page
+  border: "#E7DAB0",    // Faded tan, like real paper edges
   fabShadow: "0 6px 22px rgba(158,133,52,0.20)",
-  paperLines: "#ede5bc" // light yellow for notebook lines
+  paperLines: "#ede5bc" // Notebook page ruling
 };
 
 const CATEGORY_COLORS = [
@@ -127,7 +127,10 @@ function QuickNoteMainContainer() {
               key={cat}
               style={{
                 ...styles.categoryTab,
-                background: getCategoryColor(cat, allCategories)
+                background: getCategoryColor(cat, allCategories),
+                boxShadow:
+                  "0 2px 7px #e3c55e33, 0 1px 0 #fff9e4 inset",
+                textShadow: "0 1px 0 #f6e4b8"
               }}
             >
               {cat}
@@ -221,7 +224,8 @@ function NoteCard({ note, onEdit, onDelete, allCategories }) {
               key={cat}
               style={{
                 ...styles.categoryLabel,
-                background: getCategoryColor(cat, allCategories)
+                background: "linear-gradient(180deg,#ffe993 60%,#e3c96a 100%)",
+                border: "1.2px solid #dfc66a"
               }}
             >
               {cat}
@@ -319,7 +323,8 @@ function NoteEditorModal({ note, onSave, onCancel, allCategories }) {
               key={cat}
               style={{
                 ...styles.categoryLabel,
-                background: getCategoryColor(cat, allCategories)
+                background: "linear-gradient(180deg,#ffe993 60%,#e3c96a 100%)",
+                border: "1.2px solid #dfc66a"
               }}
             >
               {cat}
@@ -390,38 +395,41 @@ function getCategoryColor(cat, allCategories) {
   return CATEGORY_COLORS[idx % CATEGORY_COLORS.length] || COLORS.accent;
 }
 
-/* === PURE CSS-IN-JS STYLES === */
+/* === PURE CSS-IN-JS SKEUOMORPHIC STYLES === */
 const styles = {
   root: {
-    fontFamily: "'Inter',sans-serif",
-    background: COLORS.background,
+    fontFamily: "'Inter',serif",
+    background: `repeating-linear-gradient(135deg, #f9f6ed 0 6px, #f5f0e6 8px 32px), url("data:image/svg+xml;utf8,<svg width='16' height='16' xmlns='http://www.w3.org/2000/svg'><rect fill='%23ede5bc' width='1' height='16'/></svg>")`,
     minHeight: "100vh",
     paddingTop: 46,
     paddingBottom: 0,
-    position: "relative"
+    position: "relative",
+    boxShadow: "inset 0 8px 40px 0 #e9debe55"
   },
   searchBarContainer: {
-    background: COLORS.secondary,
+    background: "rgba(250,247,233,0.9)",
     padding: "22px 0 12px 0",
-    boxShadow: "0 1px 0 " + COLORS.border,
+    boxShadow: "0 2px 0 #e1dbc4",
     position: "sticky",
     top: 0,
-    zIndex: 9
+    zIndex: 9,
+    borderBottom: "2px solid #eedfa2"
   },
   searchInput: {
     width: "96%",
     margin: "0 auto",
     display: "block",
     height: 44,
-    border: "1px solid " + COLORS.border,
+    border: "1.5px solid #e7d9b0",
     borderRadius: 22,
     outline: "none",
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: 400,
     padding: "0 18px",
     boxSizing: "border-box",
-    background: COLORS.secondary,
-    color: COLORS.text
+    background: "rgba(255,252,241,0.87)",
+    color: "#6E5236",
+    boxShadow: "0 1px 8px #e6dcc390"
   },
   categoryTabs: {
     display: "flex",
@@ -431,197 +439,242 @@ const styles = {
   },
   categoryTab: {
     fontSize: 13,
-    color: "#fff",
+    color: "#fffefa",
     fontWeight: 500,
-    borderRadius: 24,
-    padding: "4px 16px",
+    borderRadius: 18,
+    padding: "7px 19px 7px 19px",
     marginBottom: 2,
-    background: COLORS.accent,
-    cursor: "default"
+    background: "linear-gradient(180deg,#ffefad 70%,#e6c76c 100%)",
+    boxShadow: "0 2px 7px #e3c55e33,0 1px 0 #fff9e4 inset",
+    border: "1.5px solid #ecd078",
+    cursor: "pointer",
+    textShadow: "0 1px 0 #f6e4b8"
   },
   noteGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-    gap: "18px",
-    padding: "24px",
-    marginBottom: 30
+    gridTemplateColumns: "repeat(auto-fit, minmax(265px, 1fr))",
+    gap: "26px",
+    padding: "30px",
+    marginBottom: 34
   },
   card: {
-    background: COLORS.card,
-    boxShadow: "0 1px 6px 0 rgba(44, 71, 130,0.06)",
-    border: "1px solid " + COLORS.border,
-    borderRadius: 14,
-    padding: 18,
-    transition: "box-shadow .17s cubic-bezier(.4,0,.2,1)",
+    background:
+      `repeating-linear-gradient(to bottom, transparent, transparent 21px, ${COLORS.paperLines} 22px),` +
+      `radial-gradient(ellipse 110% 85% at 50% 90%, #f6eac4 50%, #fffbe7 100%)`,
+    boxShadow:
+      "0 7px 28px rgba(207,194,124,0.19), 0 2px 0 #ece3bb inset, 0 0 0 3px #f3ecda",
+    border: "2.5px solid #ebdcc3",
+    borderRadius: 22,
+    padding: "22px 19px 20px 24px",
+    transition: "box-shadow .21s cubic-bezier(.4,0,.2,1)",
     display: "flex",
     flexDirection: "column",
-    minHeight: 132,
+    minHeight: 150,
     wordBreak: "break-word",
-    position: "relative"
+    position: "relative",
+    boxSizing: "border-box",
+    overflow: "hidden"
   },
   cardHeader: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 5
+    marginBottom: 6,
+    borderBottom: "2px dashed #ede5bc",
+    paddingBottom: 6
   },
   cardTitle: {
     fontWeight: 700,
-    fontSize: 17,
-    color: COLORS.primary,
-    lineHeight: "1.2"
+    fontSize: 18,
+    color: "#b09864",
+    lineHeight: "1.1",
+    textShadow: "0 1px 0 #fffad2"
   },
   cardContent: {
     fontSize: 15,
     color: COLORS.text,
-    marginBottom: 9,
-    flex: "1 0 auto"
+    marginBottom: 11,
+    flex: "1 0 auto",
+    fontFamily: "'Comic Sans MS', 'Inter', 'serif'",
+    letterSpacing: "0.01em",
+    background: "none"
   },
   categoryLabels: {
     display: "flex",
     flexWrap: "wrap",
-    gap: 7
+    gap: 7,
+    marginTop: 6
   },
   categoryLabel: {
-    color: "#fff",
+    color: "#6E5236",
     fontSize: 12,
-    borderRadius: 20,
-    padding: "2px 10px",
-    marginRight: 4,
+    borderRadius: 13,
+    padding: "3.5px 12px 3.5px 10px",
+    marginRight: 3,
     marginBottom: 3,
-    background: COLORS.primary,
+    background: "linear-gradient(180deg,#ffe993 60%,#e3c96a 100%)",
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
+    fontWeight: 500,
+    boxShadow: "0 1.5px 3px #e2c95b1a",
+    border: "1.2px solid #dfc66a"
   },
   labelCloseBtn: {
-    marginLeft: 7,
+    marginLeft: 8,
     background: "none",
-    color: "#fff",
+    color: "#d4a12a",
     border: "none",
-    fontSize: "1em",
+    fontSize: "1.05em",
     cursor: "pointer",
     outline: "none",
     padding: 0,
-    lineHeight: 1.1
+    lineHeight: 1.1,
+    fontWeight: 400,
+    textShadow: "0 1px 1px #fffab9"
   },
   iconBtn: {
-    background: "none",
-    border: "none",
-    color: COLORS.primary,
+    background: "linear-gradient(160deg,#fff 90%,#ecd29e 100%)",
+    border: "1.2px solid #cab36e",
+    color: "#d1b259",
     cursor: "pointer",
     fontSize: 18,
-    marginLeft: 7,
-    padding: 3
+    marginLeft: 11,
+    padding: 5,
+    borderRadius: 8,
+    boxShadow: "0 2px 2px #e3c55e22, 0 1px 0 #fff5db inset",
+    opacity: 0.9,
+    transition: "background 0.11s"
   },
   dateInfo: {
     fontSize: 11,
-    color: "#bbb",
-    marginTop: 8,
+    color: "#bba665",
+    marginTop: 11,
     textAlign: "right"
   },
   emptyMsg: {
-    color: COLORS.primary,
+    color: "#d5bd7e",
     fontSize: 19,
     fontWeight: 400,
     textAlign: "center",
-    marginTop: 80
+    marginTop: 90,
+    fontFamily: "'Brush Script MT',cursive"
   },
   fab: {
     position: "fixed",
-    right: 32,
-    bottom: 32,
-    background: COLORS.primary,
-    color: "#fff",
-    borderRadius: "50%",
-    width: 64,
-    height: 64,
-    fontSize: 38,
-    border: "none",
-    boxShadow: COLORS.fabShadow,
+    right: 34,
+    bottom: 36,
+    background:
+      "linear-gradient(140deg, #fffbe7 74%, #ffeEC3 100%)," +
+      "radial-gradient(ellipse 70% 56% at 64% 43%, #fae07b 0%, #ffdf63 81%)",
+    color: "#b98f1e",
+    borderRadius: "25% 35% 42% 25%/30% 60% 30% 60%",
+    width: 74,
+    height: 74,
+    fontSize: 41,
+    border: "2.5px solid #feefc1",
+    boxShadow:
+      "0 8px 36px #f3d87c5d, 0 2px 0 #fff9e4 inset, 0 9px 12px #dbc26630",
     cursor: "pointer",
     zIndex: 500,
-    transition: "background 0.19s"
+    transition: "box-shadow 0.18s, transform 0.13s linear",
+    fontFamily: "'Comic Sans MS', 'Arial', cursive",
+    fontWeight: 700,
+    outline: "none",
+    filter: "drop-shadow(0 2px 8px #fff5cc8b)"
   },
-  // Modal styles
+  // Modal styles (notebook sheet appearance)
   modalOverlay: {
     position: "fixed",
     top: 0, left: 0, right: 0, bottom: 0,
-    background: "rgba(80,90,110,0.19)",
+    background: "rgba(228,214,180,0.21)",
     zIndex: 1001,
     display: "flex",
     alignItems: "center",
     justifyContent: "center"
   },
   modal: {
-    background: "#fff",
-    minWidth: 320,
-    maxWidth: 460,
+    background:
+      "repeating-linear-gradient(to bottom, transparent, transparent 28px, #efe7c5 29px)",
+    minWidth: 342,
+    maxWidth: 480,
     width: "98vw",
-    borderRadius: 13,
-    boxShadow: "0 4px 16px rgba(74,144,226,.15)",
-    padding: "28px 28px 16px 28px",
+    borderRadius: 20,
+    boxShadow:
+      "0 8px 24px 0 #fde6a4cc, 0 2px 0 #fff9e4 inset",
+    padding: "34px 32px 16px 38px",
     display: "flex",
     flexDirection: "column",
-    gap: 15,
-    position: "relative"
+    gap: 18,
+    position: "relative",
+    border: "2.3px solid #edd98c",
+    fontFamily: "'Comic Sans MS', 'Inter', 'serif'",
+    color: "#574b28"
   },
   modalHeader: {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 8
+    marginBottom: 9,
+    paddingBottom: 7,
+    borderBottom: "1.5px dashed #e6c76c"
   },
   input: {
-    fontSize: 16,
-    padding: "9px 12px",
-    border: "1px solid #d4e0f7",
-    borderRadius: 7,
-    color: COLORS.text,
-    background: "#fafcff",
-    marginBottom: 10
+    fontSize: 17,
+    padding: "10px 13px",
+    border: "1.6px solid #f1e4b8",
+    borderRadius: 8,
+    color: "#856d37",
+    background: "#fffbe9",
+    marginBottom: 12,
+    boxShadow: "0 1px 8px #f9edcc73"
   },
   textarea: {
-    fontFamily: "inherit",
+    fontFamily: "'Comic Sans MS', 'Inter', serif",
     fontSize: 15,
-    borderRadius: 7,
-    padding: "10px 12px",
-    border: "1px solid #d4e0f7",
-    minHeight: 84,
+    borderRadius: 8,
+    padding: "11px 14px",
+    border: "1.7px solid #efdca7",
+    minHeight: 92,
     resize: "vertical",
-    color: COLORS.text,
-    background: "#fafcff",
-    marginBottom: 8
+    color: "#746526",
+    background: "#fffbe7",
+    marginBottom: 10,
+    boxShadow: "0 1px 8px #f7eaba93"
   },
   catPickerContainer: {
     display: "flex",
     alignItems: "center",
-    gap: 5,
+    gap: 7,
     flexWrap: "wrap",
-    margin: "6px 0 0 0"
+    margin: "8px 0 0 0"
   },
   btn: {
-    background: COLORS.primary,
-    color: "#fff",
-    border: "none",
-    borderRadius: 4,
-    padding: "8px 18px",
+    background: "linear-gradient(90deg, #eed18b 85%, #fdf6d4 100%)",
+    color: "#644813",
+    border: "1.2px solid #c9b46d",
+    borderRadius: 8,
+    padding: "8.5px 22px",
     fontSize: 15,
-    fontWeight: 500,
+    fontWeight: 600,
     cursor: "pointer",
-    marginBottom: 7,
-    marginTop: 4,
-    transition: "background 0.18s"
+    marginBottom: 9,
+    marginTop: 5,
+    boxShadow: "0 2.5px 10px #e1c87e2a",
+    transition: "background 0.14s, box-shadow 0.14s"
   },
   primaryBtn: {
-    background: COLORS.primary
+    background: "linear-gradient(80deg,#fdeab3 70%,#f7ca42 100%)",
+    color: "#9d8027"
   },
   dangerBtn: {
-    background: "#D0021B"
+    background: "linear-gradient(90deg, #ffe9bc 70%,#e3b561 100%)",
+    color: "#b32f0d",
+    border: "1.2px solid #ea9392"
   },
   modalActions: {
     display: "flex",
     justifyContent: "flex-end",
-    gap: 8,
+    gap: 11,
     marginTop: 6
   }
 };
