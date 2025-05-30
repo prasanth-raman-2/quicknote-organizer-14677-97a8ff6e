@@ -1,9 +1,13 @@
 :root {
-  --base-light: #00ffff;
-  --base-dark: #00008b;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
+  --primary: #4A90E2;
+  --secondary: #ffffff;
+  --accent: #F5A623;
+  --text-dark: #222;
+  --text-secondary: #6C8099;
+  --border-color: #e3e8ee;
+  --card-bg: #fff;
+  --background: #F7Fafd;
+  --shadow: 0 1px 6px 0 rgba(44, 71, 130, 0.08);
 }
 
 body {
