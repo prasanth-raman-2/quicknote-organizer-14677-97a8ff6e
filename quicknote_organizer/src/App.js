@@ -1,34 +1,25 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import QuickNoteMainContainer from "./QuickNoteMainContainer";
 
+// PUBLIC_INTERFACE
 function App() {
   return (
     <div className="app">
-      <nav className="navbar">
+      <nav className="navbar" style={{ background: "#4A90E2" }}>
         <div className="container">
           <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <div className="logo">
-              <span className="logo-symbol">*</span> KAVIA AI
+              <span className="logo-symbol" style={{ color: "#F5A623" }}>✏️</span> QuickNote Organizer
             </div>
-            <button className="btn">Template Button</button>
+            <span style={{ color: "#fff", fontSize: 14, letterSpacing: 1, fontWeight: 400 }}>
+              by KAVIA AI
+            </span>
           </div>
         </div>
       </nav>
-
-      <main>
-        <div className="container">
-          <div className="hero">
-            <div className="subtitle">AI Workflow Manager Template</div>
-            
-            <h1 className="title">quicknote_organizer</h1>
-            
-            <div className="description">
-              Start building your application.
-            </div>
-            
-            <button className="btn btn-large">Button</button>
-          </div>
-        </div>
+      <main style={{ paddingTop: 56 }}>
+        <QuickNoteMainContainer />
       </main>
     </div>
   );
