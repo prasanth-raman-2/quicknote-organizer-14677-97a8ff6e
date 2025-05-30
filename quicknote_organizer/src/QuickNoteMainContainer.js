@@ -5,11 +5,12 @@ const COLORS = {
   primary: "#4A90E2",
   secondary: "#FFFFFF",
   accent: "#F5A623",
-  background: "#F7Fafd",
-  text: "#222",
-  card: "#fff",
-  border: "#e3e8ee",
-  fabShadow: "0 4px 18px rgba(74,144,226,.15)"
+  background: "#f5f0e6", // subtle off-white for faux paper background
+  text: "#232019",
+  card: "#fffbe7",      // creamy paper color for notes
+  border: "#E7DAB0",    // faded tan to resemble real paper borders
+  fabShadow: "0 6px 22px rgba(158,133,52,0.20)",
+  paperLines: "#ede5bc" // light yellow for notebook lines
 };
 
 const CATEGORY_COLORS = [
